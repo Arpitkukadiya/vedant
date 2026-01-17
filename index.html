@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Premium Export Portfolio | H.V. INTERNATIONAL</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1B4332;
+            --accent: #FF7043;
+            --white: #FFFFFF;
+            --bg-light: #F8F9FA;
+            --text: #2D3436;
+            --shadow: 0 15px 45px rgba(0,0,0,0.1);
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            color: var(--text); 
+            line-height: 1.6; 
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
+                        url('https://images.pexels.com/photos/235925/pexels-photo-235925.jpeg?auto=compress&w=2000');
+            background-attachment: fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- RESPONSIVE NAVIGATION --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            transition: var(--transition);
+        }
+        nav { display: flex; align-items: center; justify-content: space-between; }
+        .logo img { height: 50px; width: auto; object-fit: contain; }
+
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { 
+            text-decoration: none; color: var(--primary); 
+            font-weight: 700; font-size: 13px; 
+            text-transform: uppercase; letter-spacing: 1px; 
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        .btn-whatsapp { 
+            background: #25D366; color: white !important; 
+            padding: 10px 20px; border-radius: 50px; 
+            text-decoration: none; font-weight: 800; font-size: 12px;
+            display: flex; align-items: center; gap: 5px;
+        }
+
+        /* --- HERO --- */
+        .hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 80px; }
+        .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); margin-bottom: 10px; }
+
+        /* --- PRODUCT GRID (THE MASTER CORE) --- */
+        .category-title {
+            text-align: left; margin: 60px 0 30px;
+            padding-left: 15px; border-left: 6px solid var(--accent);
+            font-size: 2.2rem;
+        }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px; overflow: hidden;
+            box-shadow: var(--shadow); transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.5);
+            display: flex; flex-direction: column;
+        }
+        .product-card:hover { transform: translateY(-10px); background: #fff; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+
+        .image-container { height: 240px; overflow: hidden; position: relative; background: #eee; }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
+        .product-card:hover .image-container img { transform: scale(1.1); }
+
+        .badge {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--accent); color: white;
+            padding: 4px 12px; border-radius: 50px;
+            font-size: 10px; font-weight: 900; text-transform: uppercase;
+        }
+
+        .content { padding: 20px; text-align: center; }
+        .content h3 { font-size: 20px; margin-bottom: 8px; color: var(--primary); }
+        .content p { font-size: 14px; color: #555; line-height: 1.5; }
+
+        /* --- CONTACT SECTION --- */
+        .contact-row { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; margin-top: 50px; }
+        .contact-left { background: var(--primary); color: white; padding: 40px; border-radius: 25px; }
+        .contact-right { background: white; padding: 40px; border-radius: 25px; box-shadow: var(--shadow); }
+        input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; border: 2px solid #f1f1f1; border-radius: 12px; font-family: inherit; }
+        .submit-btn { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 50px; font-weight: 800; cursor: pointer; width: 100%; transition: 0.3s; }
+        .submit-btn:hover { background: var(--primary); transform: scale(1.02); }
+
+        footer { background: #08120d; color: white; padding: 40px 0; text-align: center; font-size: 14px; }
+
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 992px) {
+            .contact-row { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Use a hamburger menu in real production */
+            .category-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="logo.jpeg" alt="H.V. INTERNATIONAL">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" style="color: var(--accent)">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html" >Products</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <a href="https://wa.me/916353747818" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> WHATSAPP</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container" data-aos="zoom-in">
+            <h1>Global Export Portfolio</h1>
+            <p>Certified Quality. Farm-to-Port Integrity. Worldwide Supply.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <h2 class="category-title" data-aos="fade-right">Premium Fruit Range</h2>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Top Grade</span><img src="https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?auto=compress&w=600" alt="Mango"></div>
+                <div class="content"><h3>Alphonso Mango</h3><p>VHT treated for international safety. Sourced from Ratnagiri belt.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="image-container"><span class="badge">Ruby Red</span><img src="https://images.pexels.com/photos/6525198/pexels-photo-6525198.jpeg?auto=compress&w=600" alt="Pomegranate"></div>
+                <div class="content"><h3>Bhagwa Pomegranate</h3><p>Soft-seeded Bhagwa variety with high brix and deep aril color.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-container"><span class="badge">Seedless</span><img src="https://images.pexels.com/photos/708777/pexels-photo-708777.jpeg?auto=compress&w=600" alt="Grapes"></div>
+                <div class="content"><h3>Thompson Grapes</h3><p>EU MRL compliant crisp white seedless grapes. Global-GAP certified.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Fresh</span><img src="https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg?auto=compress&w=600" alt="Banana"></div>
+                <div class="content"><h3>Cavendish Banana</h3><p>Export grade uniform fingers. Managed via precise cold-chain transit.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Nagpur</span><img src="https://images.pexels.com/photos/5475147/pexels-photo-5475147.jpeg?auto=compress&w=600" alt="Orange"></div>
+                <div class="content"><h3>Fresh Oranges</h3><p>High juice content Mandarins, waxed and graded for shelf-life.</p></div>
+            </div>
+        </div>
+
+        <h2 class="category-title" data-aos="fade-right">Fresh Vegetables</h2>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Bulk</span><img src="https://images.pexels.com/photos/1443867/pexels-photo-1443867.jpeg?auto=compress&w=600" alt="Onion"></div>
+                <div class="content"><h3>Red Onion</h3><p>45mm-65mm Nashik Red Onions. Packed in high-aeration mesh bags.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="image-container"><span class="badge">Spicy</span><img src="https://images.pexels.com/photos/533352/pexels-photo-533352.jpeg?auto=compress&w=600" alt="Chilli"></div>
+                <div class="content"><h3>Green Chilli</h3><p>Export quality G4 variety. Deep green color and pungent flavor profile.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-container"><span class="badge">Table Grade</span><img src="https://images.pexels.com/photos/2286776/pexels-photo-2286776.jpeg?auto=compress&w=600" alt="Potato"></div>
+                <div class="content"><h3>Export Potato</h3><p>Low-sugar LR and Jyoti varieties. Sized precisely for retail packing.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Washed</span><img src="termeric.png" alt="Ginger"></div>
+                <div class="content"><h3>Fresh Ginger</h3><p>Machine-cleaned, fiber-rich ginger with strong medicinal properties.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Superfood</span><img src="coconut.png" alt="Coconut"></div>
+                <div class="content"><h3>Semi-Husk Coconut</h3><p>Mature coconuts with high water and thick kernel. Weight graded.</p></div>
+            </div>
+        </div>
+
+        <h2 class="category-title" data-aos="fade-right">Grains & Groudnuts</h2>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Milling</span><img src="https://images.pexels.com/photos/265216/pexels-photo-265216.jpeg?auto=compress&w=600" alt="Wheat"></div>
+                <div class="content"><h3>Milling Wheat</h3><p>Sharbati variety. High protein and gluten levels for global mills.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="50">
+                <div class="image-container"><span class="badge">Feed Grade</span><img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg?auto=compress&w=600" alt="Maize"></div>
+                <div class="content"><h3>Yellow Maize</h3><p>Non-GMO maize. Strictly moisture-controlled for bulk shipping.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-container"><span class="badge">Premium</span><img src="https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&w=600" alt="Rice"></div>
+                <div class="content"><h3>Basmati Rice</h3><p>1121 Sella extra-long grain. Sortex-cleaned and silky polished.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">HPS Quality</span><img src="groundnut.png" alt="Peanuts"></div>
+                <div class="content"><h3>Groundnuts</h3><p>Bold & Java varieties. Hand-picked sorted (HPS) for export.</p></div>
+            </div>
+        </div>
+
+    </div>
+<section class="section-padding container" style="margin-top: 80px;">
+        <div class="contact-row">
+            <div class="contact-left" data-aos="fade-right">
+                <h2 style="color: var(--accent); font-family: 'Playfair Display'; font-size: 2.5rem;">Export Headquarters</h2>
+                <p style="margin: 20px 0;">H.V. INTERNATIONAL</p>
+                <p><i class="fas fa-map-marker-alt"></i> Amreli, Gujarat, India</p>
+                <br>
+                <p><i class="fas fa-phone"></i> +91 6353747818</p>
+                <p><i class="fas fa-envelope"></i> vedanthariyani371@gmail.com</p>
+            </div>
+
+            <div class="contact-right" data-aos="fade-left">
+                <h3 style="margin-bottom: 20px;">Global Pricing Inquiry</h3>
+                <form id="contact-form">
+                    <input type="text" name="user_name" placeholder="Full Name" required>
+                    <input type="email" name="user_email" placeholder="Business Email" required>
+                    <textarea name="message" rows="5" placeholder="Which products and what quantity do you need? (e.g. 20 Tons of Pomegranate to Dubai Port)" required></textarea>
+                    <button type="submit" id="submit-btn" class="submit-btn">GET QUOTATION</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 H.V. INTERNATIONAL | Exporting Trust Worldwide</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+
+        // --- THE PART THAT MAKES IT WORK ---
+        (function() {
+            // 1. Paste your Public Key here
+            emailjs.init("YOUR_PUBLIC_KEY"); 
+        })();
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = 'SENDING...';
+
+            // 2. Paste your Service ID and Template ID here
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(() => {
+                    alert('Inquiry Sent! We will contact you with pricing shortly.');
+                    btn.innerText = 'GET QUOTATION';
+                    this.reset();
+                }, (error) => {
+                    alert('Failed to send. Please use WhatsApp.');
+                    console.log('FAILED...', error);
+                    btn.innerText = 'GET QUOTATION';
+                });
+        });
+    </script>
+</body>
+</html>

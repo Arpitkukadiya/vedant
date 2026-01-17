@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Global Export Catalog | H.V. INTERNATIONAL</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1B4332;
+            --accent: #FF7043;
+            --white: #FFFFFF;
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --text: #2D3436;
+            --shadow: 0 15px 35px rgba(0,0,0,0.1);
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            color: var(--text); 
+            line-height: 1.8; 
+            overflow-x: hidden; 
+            background: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), 
+                        url('https://images.pexels.com/photos/235925/pexels-photo-235925.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary); }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+
+        /* --- RESPONSIVE HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        nav { display: flex; align-items: center; justify-content: space-between; position: relative; }
+        .logo img { height: 50px; object-fit: contain; }
+
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Mobile Menu Button */
+        .mobile-toggle { display: none; font-size: 24px; color: var(--primary); cursor: pointer; }
+
+        .btn-header { background: #25D366; color: white !important; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+
+        /* --- PRODUCT GRID --- */
+        .category-title {
+            text-align: left;
+            margin: 60px 0 30px;
+            padding-left: 15px;
+            border-left: 6px solid var(--accent);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
+        
+        .product-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .product-card:hover { transform: translateY(-10px); background: #fff; }
+
+        .image-container { height: 260px; overflow: hidden; position: relative; }
+        .image-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
+
+        .badge {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--accent); color: white;
+            padding: 5px 15px; border-radius: 50px;
+            font-size: 10px; font-weight: 900; text-transform: uppercase;
+        }
+
+        .content { padding: 25px; text-align: center; flex-grow: 1; }
+        .content h3 { font-size: 20px; margin-bottom: 10px; }
+        .content p { font-size: 14px; color: #555; line-height: 1.5; }
+
+        /* --- CONTACT SECTION --- */
+        .contact-row { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin-top: 50px; }
+        .contact-left { background: var(--glass-dark); color: white; padding: 40px; border-radius: 30px; }
+        .contact-right { background: white; padding: 40px; border-radius: 30px; box-shadow: var(--shadow); }
+        input, textarea { width: 100%; padding: 15px; margin-bottom: 15px; border: 2px solid #f1f1f1; border-radius: 12px; font-family: inherit; }
+        .submit-btn { background: var(--accent); color: white; border: none; padding: 18px; border-radius: 50px; font-weight: 800; cursor: pointer; width: 100%; transition: 0.3s; }
+
+        footer { background: #08120d; color: white; padding: 40px 0; text-align: center; }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            .mobile-toggle { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .contact-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .image-container { height: 200px; }
+            .product-header h1 { font-size: 2.2rem; }
+            .section-padding { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo"><img src="logo.jpeg" alt="Logo"></div>
+                
+                <div class="mobile-toggle" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+
+                <ul class="nav-links" id="menuList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html" style="color: var(--accent)">Products</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://wa.me/916353747818" class="btn-header"><i class="fab fa-whatsapp"></i> WHATSAPP</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="product-header section-padding">
+        <div class="container" data-aos="zoom-in">
+            <h1 style="margin-top: 40px;">Export Specialties</h1>
+            <p>India's Premium Quality Produce</p>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <h2 class="category-title" data-aos="fade-right">Fresh Fruit Portfolio</h2>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Top Export</span><img src="https://images.pexels.com/photos/6525198/pexels-photo-6525198.jpeg?auto=compress&w=600" alt="Pomegranate"></div>
+                <div class="content"><h3>Bhagwa Pomegranate</h3><p>Ruby red arils and soft seeds. Sourced from Global-GAP certified orchards.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">MRL Safe</span><img src="https://images.pexels.com/photos/708777/pexels-photo-708777.jpeg?auto=compress&w=600" alt="Grapes"></div>
+                <div class="content"><h3>Seedless Grapes</h3><p>Thompson & Black Varieties. Meticulously graded for crunch and sugar.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">VHT Treated</span><img src="https://images.pexels.com/photos/2294471/pexels-photo-2294471.jpeg?auto=compress&w=600" alt="Mango"></div>
+                <div class="content"><h3>Alphonso Mango</h3><p>Fiberless pulp and royal aroma. Naturally ripened for international markets.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Grade A</span><img src="https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg?auto=compress&w=600" alt="Banana"></div>
+                <div class="content"><h3>Cavendish Banana</h3><p>Large uniform fingers with excellent shelf life for sea transport.</p></div>
+            </div>
+        </div>
+
+        <h2 class="category-title" data-aos="fade-right">Premium Vegetables</h2>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Bulk</span><img src="https://images.pexels.com/photos/1443867/pexels-photo-1443867.jpeg?auto=compress&w=600" alt="Onion"></div>
+                <div class="content"><h3>Nashik Red Onion</h3><p>Available in 45mm to 65mm. Known for pungency and durability.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Spicy</span><img src="https://images.pexels.com/photos/533352/pexels-photo-533352.jpeg?auto=compress&w=600" alt="Chilli"></div>
+                <div class="content"><h3>Green Chilli (G4)</h3><p>Sorted for uniform length and deep green color. High pungent level.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Washed</span><img src="termeric.png" alt="Ginger"></div>
+                <div class="content"><h3>Fresh Ginger</h3><p>Cleaned and graded for size. High essential oil content.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Table</span><img src="https://images.pexels.com/photos/2286776/pexels-photo-2286776.jpeg?auto=compress&w=600" alt="Potato"></div>
+                <div class="content"><h3>Export Potato</h3><p>Low sugar varieties ideal for global retail and chip making.</p></div>
+            </div>
+        </div>
+
+        <h2 class="category-title" data-aos="fade-right">Grains & Commodities</h2>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Cleaned</span><img src="https://images.pexels.com/photos/265216/pexels-photo-265216.jpeg?auto=compress&w=600" alt="Wheat"></div>
+                <div class="content"><h3>Milling Wheat</h3><p>Sharbati variety. High protein content suitable for fine flour.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Non-GMO</span><img src="https://images.pexels.com/photos/603030/pexels-photo-603030.jpeg?auto=compress&w=600" alt="Maize"></div>
+                <div class="content"><h3>Yellow Maize</h3><p>Feed grade and human consumption. Strictly moisture controlled.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Aromatic</span><img src="https://images.pexels.com/photos/4110251/pexels-photo-4110251.jpeg?auto=compress&w=600" alt="Rice"></div>
+                <div class="content"><h3>Basmati Rice</h3><p>1121 Sella variety. Extra long grain with silky polish.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">HPS</span><img src="groundnut.png" alt="Peanuts"></div>
+                <div class="content"><h3>Groundnuts</h3><p>Bold and Java varieties. Hand-picked sorted for snacks.</p></div>
+            </div>
+            <div class="product-card" data-aos="fade-up">
+                <div class="image-container"><span class="badge">Pure</span><img src="jira.png" alt="Cumin"></div>
+                <div class="content"><h3>Cumin Seeds</h3><p>99.5% purity, machine cleaned with intense aroma.</p></div>
+            </div>
+        </div>
+
+    </div>
+
+    <section class="section-padding container">
+        <div class="contact-row">
+            <div class="contact-left" data-aos="fade-right">
+                <h2 style="color: var(--accent)">Global Inquiry</h2>
+                <p>H.V. INTERNATIONAL</p>
+                <p>Amreli, Gujarat, India</p>
+                <br>
+                <p><i class="fas fa-phone"></i> +91 6353747818</p>
+                <p><i class="fas fa-envelope"></i> vedanthariyani371@gmail.com</p>
+            </div>
+            <div class="contact-right" data-aos="fade-left">
+                <form id="contact-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <textarea rows="4" placeholder="Your Order Details..." required></textarea>
+                    <button type="submit" class="submit-btn">GET QUOTATION</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 H.V. INTERNATIONAL | Official Proprietorship</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        function toggleMenu() {
+            document.getElementById('menuList').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

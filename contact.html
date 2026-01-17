@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Us | H.V. INTERNATIONAL</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #1B4332;
+            --accent: #FF7043;
+            --bg-light: #F8F9FA;
+            --white: #FFFFFF;
+            --text: #2D3436;
+            --shadow: 0 15px 45px rgba(0,0,0,0.1);
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); line-height: 1.8; background-color: var(--white); overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+
+        /* --- RESPONSIVE NAVIGATION --- */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+        }
+        nav { display: flex; align-items: center; justify-content: space-between; position: relative; }
+        .logo-wrap img { height: 50px; width: auto; object-fit: contain; }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle { display: none; font-size: 24px; color: var(--primary); cursor: pointer; }
+
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; text-transform: uppercase; transition: var(--transition); }
+        .nav-links a:hover { color: var(--accent); }
+
+        .btn-header { 
+            background: #25D366 !important; 
+            color: white !important; 
+            padding: 10px 22px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition); 
+        }
+
+        /* --- PAGE HEADER --- */
+        .contact-header {
+            height: 40vh;
+            background: linear-gradient(rgba(13, 33, 24, 0.85), rgba(13, 33, 24, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523966211575-eb4a01e7dd51?q=80&w=2070&auto=format');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 60px;
+        }
+        .contact-header h1 { color: white; font-size: clamp(2rem, 8vw, 4rem); }
+
+        /* --- CONTACT GRID --- */
+        .contact-grid { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 40px; 
+            margin-top: -60px; 
+            position: relative; 
+            z-index: 10; 
+        }
+        
+        /* Left Panel */
+        .info-panel { 
+            flex: 1; min-width: 300px;
+            background: var(--primary); 
+            color: white; padding: 50px 40px; 
+            border-radius: 30px; box-shadow: var(--shadow);
+        }
+        .info-panel h2 { color: var(--accent); margin-bottom: 25px; }
+        .contact-item { display: flex; gap: 15px; margin-bottom: 25px; }
+        .contact-item i { 
+            width: 45px; height: 45px; background: var(--accent); 
+            border-radius: 50%; display: flex; align-items: center; 
+            justify-content: center; font-size: 18px; flex-shrink: 0; 
+        }
+
+        /* Right Panel */
+        .form-panel { 
+            flex: 1.5; min-width: 300px;
+            background: white; padding: 50px 40px; 
+            border-radius: 30px; box-shadow: var(--shadow); 
+            border: 1px solid #f1f1f1;
+        }
+        .input-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        input, textarea { 
+            width: 100%; padding: 15px; margin-bottom: 20px; 
+            border: 2px solid #f1f1f1; border-radius: 12px; 
+            font-family: inherit; font-size: 16px; 
+        }
+        input:focus, textarea:focus { border-color: var(--accent); outline: none; }
+        
+        .submit-btn { 
+            background: var(--primary); color: white; border: none; 
+            padding: 18px; border-radius: 50px; font-weight: 800; 
+            font-size: 16px; cursor: pointer; transition: 0.3s; width: 100%; 
+        }
+
+        /* --- MAP SECTION --- */
+        .map-wrap { margin-top: 60px; border-radius: 30px; overflow: hidden; height: 400px; box-shadow: var(--shadow); }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        footer { background: #0D2118; color: white; padding: 40px 0; text-align: center; font-size: 14px; }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .contact-grid { margin-top: 30px; }
+            .info-panel, .form-panel { padding: 35px 25px; }
+        }
+
+        @media (max-width: 480px) {
+            .contact-header { height: 30vh; }
+            .section-padding { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-wrap">
+                    <img src="logo.jpeg" alt="H.V. INTERNATIONAL">
+                </div>
+                
+                <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
+                    <li><a href="contact.html" style="color: var(--accent)">Contact</a></li>
+                    <li>
+                        <a href="https://wa.me/916353747818" class="btn-header">
+                            <i class="fab fa-whatsapp"></i> WHATSAPP
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="contact-header">
+        <div class="container" data-aos="zoom-in">
+            <h6>Global Inquiry Desk</h6>
+            <h1>Let's Start a <br>Partnership</h1>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="contact-grid">
+                
+                <div class="info-panel" data-aos="fade-right">
+                    <h2>Our Location</h2>
+                    <p style="margin-bottom: 30px; opacity: 0.8;">Registered global export headquarters in Gujarat, India.</p>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>MILKAT NO.10041765, DHARAM NAGAR, VARASADA ROAD, AMRELI, GUJARAT, 365601</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+91 6353747818</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>vedanthariyani371@gmail.com</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Mon - Sat: 9:00 AM - 7:00 PM (IST)</p>
+                    </div>
+                </div>
+
+                <div class="form-panel" data-aos="fade-left">
+                    <h3>Official Inquiry</h3>
+                    <form id="contact-form">
+                        <div class="input-group">
+                            <input type="text" name="user_name" placeholder="Full Name" required>
+                            <input type="email" name="user_email" placeholder="Official Email" required>
+                        </div>
+                        <input type="text" name="subject" placeholder="Export Commodity & Destination Country">
+                        <textarea name="message" rows="4" placeholder="Order details (Volume, Port, Packaging)..." required></textarea>
+                        <button type="submit" class="submit-btn" id="submit-btn">SEND OFFICIAL INQUIRY</button>
+                    </form>
+                    <p style="font-size: 12px; margin-top: 15px; opacity: 0.6; text-align: center;">We respond within 12 business hours.</p>
+                </div>
+
+            </div>
+
+            <div class="map-wrap" data-aos="fade-up">
+                
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118556.09635032066!2d71.14493393450917!3d21.590740927771746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39589d380905186b%3A0x6b445889753c15f!2sAmreli%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1705500000000!5m2!1sen!2sin" 
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 H.V. INTERNATIONAL | Exporting Trust Worldwide.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // --- EMAILJS INTEGRATION ---
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+
+        const contactForm = document.getElementById('contact-form');
+        const btn = document.getElementById('submit-btn');
+
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            btn.innerText = 'SENDING...';
+
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(() => {
+                    btn.innerText = 'SEND OFFICIAL INQUIRY';
+                    alert('Inquiry Sent Successfully!');
+                    contactForm.reset();
+                }, (err) => {
+                    btn.innerText = 'SEND OFFICIAL INQUIRY';
+                    alert('Error: Please contact via WhatsApp.');
+                });
+        });
+    </script>
+</body>
+</html>
